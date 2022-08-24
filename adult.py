@@ -2,7 +2,6 @@ import requests
 import time
 import concurrent.futures
 import os
-from threading import Lock
 from pathlib import Path
 from bs4 import BeautifulSoup as soup
 from header import title
@@ -20,7 +19,6 @@ def threaded_downloads(directory, image_name, images, index):
 directory = str(Path(__file__).parent)+'/downloaded_galleries/'
 os.makedirs(directory, exist_ok=True)
 title()
-blacklist = ['https://www.pornpics.com/terms/', 'https://www.pornpics.com/privacy/', 'https://www.pornpics.com/cookie/', 'https://www.pornpics.com/dmca/', 'https://www.pornpics.com/2257/', 'https://www.pornpics.com/parents/', 'https://www.pornpics.com/contact/', 'https://www.pornpics.com/feedback/', 'https://www.pornpics.com/contact/', 'https://www.pornpics.com/jobs/', 'https://www.pornpics.com/cookie/','https://www.pornpics.com/feedback/']
 tiles = []
 gallery_images = []
 page = 'https://www.pornpics.com/'
