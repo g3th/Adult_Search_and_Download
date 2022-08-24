@@ -24,7 +24,6 @@ gallery_images = []
 page = 'https://www.pornpics.com/'
 query = input('\nEnter search term: ')
 full_query = page+'?q='+query.replace(' ','+')
-print(full_query)
 browser_options = Options()
 browser_options.add_argument('user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36')
 browser_options.headless = True
