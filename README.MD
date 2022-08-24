@@ -2,7 +2,7 @@
 
 ### Search a pornstar and download Adult Images ###
 
-Simple script which allows users to download whatever adult images by entering a query.
+Simple script which allows users to download adult images by entering a query.
 
 It will ask how many galleries you want to download.
 
