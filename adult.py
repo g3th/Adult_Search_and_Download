@@ -63,7 +63,7 @@ for gallery in range(user_photo_number_choice):
 	parse_links = fetch_galleries.find_all('a',{'class':'rel-link'})
 	for link in parse_links:
 		gallery_images.append(link['href'])
-mutex = Lock()
+
 with concurrent.futures.ThreadPoolExecutor(20) as executor:
 	for image in range(len(gallery_images)):
 		executor.submit(threaded_downloads, directory, str(gallery_images[image]).split('_')[2], gallery_images, image)
