@@ -8,4 +8,4 @@ Simple script which allows users to download adult images by entering a query.
 
 It will ask how many galleries you want to download.
 
-This is an example of using webdriver's scroll function (using selenium keys to scroll) in order to scrape pages using infinite scroll/lazy loading (i.e. imgur). The amount of images scraped can be set in the script, or coded as a user-input variable in the future (i.e. small, medium, large amounts of images).
+This is an example of how to use webdriver's scroll function (using selenium keys to scroll) in order to scrape pages using infinite scroll/lazy loading (i.e. imgur). The amount of images scraped can be set in the script, or coded as a user-input variable in the future (i.e. small, medium, large amounts of images).
