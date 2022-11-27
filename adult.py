@@ -50,7 +50,7 @@ while True:
 	try:
 		title()
 		print('Fetched a Total of {} galleries'.format(len(tiles)))
-		user_photo_number_choice = int(input('How many galleries would you like to download?'))
+		user_photo_number_choice = int(input('How many galleries would you like to download? '))
 		if user_photo_number_choice > len(tiles):
 			continue
 		else:
@@ -68,4 +68,5 @@ for gallery in range(user_photo_number_choice):
 with concurrent.futures.ThreadPoolExecutor(20) as executor:
 	for image in range(len(gallery_images)):
 		executor.submit(threaded_downloads, directory, str(gallery_images[image]).split('_')[2], gallery_images, image)
-print('\n')
+	executor.shutdown()
+print('\nAll Done. Total images: {} from {} galleries.\n'.format(len(gallery_images), len(tiles)))
