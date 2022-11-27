@@ -7,3 +7,5 @@ Simple script which allows users to download adult images by entering a query.
 It will ask how many galleries you want to download.
 
 This is an example of using webdriver's scroll function (using selenium keys to scroll) in order to scrape pages using infinite scroll (i.e. imgur). The amount of images scraped can be set in the script, or coded as a user-input variable in the future (i.e. small, medium, large amounts of images).
+
+27/11/22 - Removed deprecated method version "find_elements_by_*"

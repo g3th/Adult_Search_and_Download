@@ -8,6 +8,7 @@ from header import title
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
 
 def threaded_downloads(directory, image_name, images, index):
 	with open(directory + image_name,'wb') as download:
@@ -33,12 +34,12 @@ counter = 0
 
 while counter != 5:
 	print('Fetching Images..')
-	html = browser.find_element_by_tag_name('html')
-	html.send_keys(Keys.END)
+	html = browser.page_source
+	browser.execute_script("window.scrollTo(0,document.body.scrollHeight)")
 	time.sleep(0.9)
 	counter +=1
 
-for link in browser.find_elements_by_tag_name('a'):
+for link in browser.find_elements(By.TAG_NAME,"a"):
 	temporary_link = link.get_attribute('href')
 	if 'galleries' not in str(temporary_link):
 		pass
