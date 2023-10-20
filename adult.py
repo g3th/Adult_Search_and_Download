@@ -2,14 +2,16 @@ import requests
 import time
 import concurrent.futures
 import os
+import urllib3
 from pathlib import Path
 from bs4 import BeautifulSoup as soup
 from header import title
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from requests.exceptions import SSLError
 
+urllib3.disable_warnings()
 def threaded_downloads(directory, image_name, images, index):
 	with open(directory + image_name,'wb') as download:
 		progress = round(index / len(images) * 100, 1)
@@ -27,7 +29,7 @@ query = input('\nEnter search term: ')
 full_query = page+'?q='+query.replace(' ','+')
 browser_options = Options()
 browser_options.add_argument('user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.134 Safari/537.36')
-browser_options.headless = True
+browser_options.add_argument('--headless=new')
 browser = webdriver.Chrome(options = browser_options)
 browser.get(full_query)
 counter = 0
@@ -59,11 +61,16 @@ while True:
 		continue
 
 for gallery in range(user_photo_number_choice):
-	request = requests.get(tiles[gallery])
-	fetch_galleries = soup(request.content, 'html.parser')
-	parse_links = fetch_galleries.find_all('a',{'class':'rel-link'})
-	for link in parse_links:
-		gallery_images.append(link['href'])
+	skipped = 0
+	try:
+		request = requests.get(tiles[gallery], verify=False)
+		fetch_galleries = soup(request.content, 'html.parser')
+		parse_links = fetch_galleries.find_all('a',{'class':'rel-link'})
+		for link in parse_links:
+			gallery_images.append(link['href'])
+	except SSLError as e:
+		skipped += 1
+		print("\rskipped {} galleries due to an error".format(skipped))
 
 with concurrent.futures.ThreadPoolExecutor(20) as executor:
 	for image in range(len(gallery_images)):
